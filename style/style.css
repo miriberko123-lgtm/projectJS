@@ -1,8 +1,64 @@
 body {
-    background-image: url('assets/expanded-console.png');
+    /*background-image: url('assets/expanded-console.png');*/
     background-size: cover; /* גורם לתמונה למלא את כל המסך */
     background-position: center; /* ממרכז את התמונה */
     background-repeat: no-repeat; /* מונע מהתמונה לחזור על עצמה */
     margin: 0;
     height: 100vh; /* גובה מלא של המסך */
+}
+
+
+
+/* אנימציית הבהוב (Glow) */
+@keyframes blink-animation {
+    0% { box-shadow: 0 0 5px currentColor; opacity: 1; }
+    50% { box-shadow: 0 0 20px currentColor; opacity: 0.7; }
+    100% { box-shadow: 0 0 5px currentColor; opacity: 1; }
+}
+
+/* קלאס שגורם להבהוב - נוסיף אותו רק לכפתורים פעילים */
+.blinking {
+    animation: blink-animation 1.5s infinite ease-in-out;
+}
+
+/* עיצוב לכפתור שכבר נלחץ (אפור כהה) */
+.clicked {
+    background-color: #2c2c2c !important;
+    border-color: #444 !important;
+    color: #555 !important;
+    box-shadow: none !important;
+    animation: none !important; /* מפסיק להבהב כשנלחץ */
+    cursor: default;
+}
+
+/* לוח המשחק - מסדר את הכפתורים ב-5 עמודות */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* יוצר 5 עמודות שוות */
+    gap: 15px;                             /* רווח בין הכפתורים */
+    max-width: 500px;                      /* מגביל את רוחב הלוח כדי שלא יתפרס מדי */
+    margin: 20px auto;                     /* ממרכז את הלוח */
+}
+
+/* עיצוב בסיסי לכפתור (בלי צורה קבועה) */
+.system-button {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* הגדרת הצורות בנפרד */
+.circle {
+    border-radius: 50%; /* עיגול מושלם */
+}
+
+.square {
+    border-radius: 8px; /* ריבוע עם פינות מעוגלות קצת */
 }

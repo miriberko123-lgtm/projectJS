@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css">
-    <script src="scripts/config.js" defer></script>
-    <script src="scripts/logic.js" defer></script>
-    <script src="scripts/ui.js" defer></script>
-    <script src="scripts/main.js" defer></script>
+    <script src="script/config.js" defer></script>
+    <script src="script/logic.js" defer></script>
+    <script src="script/ui.js" defer></script>
+    <script src="script/main.js" defer></script>
 </head>
 <body>
-    <div id="game-board">
-    </div>
+ <main id="game-container">
+    <div id="timer-display">זמן נותר: 60</div>    
+        <header>
+            <h1>לוח פיקוד ובקרה</h1>
+            <div id="task-display">טוען משימה...</div>
+        </header>
+
+        <section id="game-board"></section>
+          <div id="score-display">ניקוד: 0</div>
+          
+        <footer>
+            <button id="start-btn">אתחול מערכת</button>
+        </footer >
+
+
+    </main>
 </body>
 </html>
