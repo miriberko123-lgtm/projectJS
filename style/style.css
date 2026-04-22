@@ -1,0 +1,8 @@
+body {
+    background-image: url('assets/expanded-console.png');
+    background-size: cover; /* גורם לתמונה למלא את כל המסך */
+    background-position: center; /* ממרכז את התמונה */
+    background-repeat: no-repeat; /* מונע מהתמונה לחזור על עצמה */
+    margin: 0;
+    height: 100vh; /* גובה מלא של המסך */
+}
