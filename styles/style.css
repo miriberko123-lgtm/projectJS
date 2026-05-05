@@ -1,0 +1,351 @@
+/* הגדרות משתנים וצבעי בסיס */
+:root {
+    --neon-blue: #00d4ff;
+    --neon-red: #ff4d4d;
+    --glass-bg: rgba(0, 20, 40, 0.65);
+    --border-glow: rgba(0, 212, 255, 0.4);
+    --main-font: 'Orbitron', sans-serif;
+    --secondary-font: 'Assistant', sans-serif;
+}
+
+/* הגדרות גוף העמוד והרקע */
+body {
+    background-image: url('assets/background.png'); /* וודאי שהנתיב לתמונה מדויק */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    font-family: var(--secondary-font);
+    color: white;
+    overflow: auto; /* מאפשר גלילה רק כשצריך */
+    
+    min-height: 100vh; 
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* מרכוז האלמנטים בדיוק לאמצע המסך */
+    gap: 20px; /* ריווח אחיד ויפה בין הכותרת, הניקוד והלוח */
+    padding: 20px;
+    
+    font-family: var(--secondary-font);
+    color: white;
+    overflow-x: hidden; /* מונע גלילה אופקית בלבד */
+
+}
+
+/* שכבת עומק לרקע */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+    z-index: -1;
+}
+
+/* כותרת המערכת והמשימה */
+header {
+    text-align: center;
+    font-family: var(--main-font);
+    background: var(--glass-bg);
+    padding: 10px 40px;
+    border-radius: 15px;
+    border: 1px solid var(--border-glow);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+#task-display {
+    font-size: 1.8rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 15px var(--neon-blue);
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+/* לוח נתונים (סטטיסטיקות) */
+#stats-container {
+    display: flex;
+    gap: 15px;
+    width: 90%;
+    max-width: 600px;
+}
+
+.stat-box {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 3px solid var(--neon-blue);
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+}
+
+.stat-box .label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+#timer-display, #score-display, #high-score-display {
+    font-family: var(--main-font);
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+/* לוח המשחק והכפתורים */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 75px);
+    grid-auto-rows: 75px; 
+    gap: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+   
+}
+#game-board.hard-mode {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px; /* רווח קטן יותר כדי לחסוך מקום */
+    max-width: 1000px; /* מאפשר ללוח לגדול קצת יותר לרוחב */
+}
+/* עיצוב כפתור המערכת בשקיפות סטייל */
+.system-button {
+    
+    width: 100%;
+    /* השורה הבאה קריטית: שומרת על הכפתורים כריבועים מושלמים אוטומטית! */
+    aspect-ratio: 1 / 1; 
+    
+    background: color-mix(in srgb, var(--btn-main-color, #333), transparent 75%);
+    border: 1px solid color-mix(in srgb, var(--btn-main-color, #fff), transparent 50%);
+    color: white;
+    font-size: 1.3rem;
+    font-family: var(--main-font);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+
+.system-button:hover {
+    background: color-mix(in srgb, var(--btn-main-color), transparent 40%);
+    border-color: white;
+    box-shadow: 0 0 20px var(--btn-main-color);
+    transform: scale(1.08) translateY(-2px);
+}
+
+/* צורות */
+.circle { border-radius: 50%; }
+.square { border-radius: 12px; }
+
+/* הבהוב לכפתורים שמתאימים למשימה */
+.blinking {
+    animation: neon-pulse 1.8s infinite alternate;
+}
+
+@keyframes neon-pulse {
+    from { 
+        box-shadow: 0 0 5px var(--btn-main-color), inset 0 0 2px var(--btn-main-color); 
+        filter: brightness(1);
+    }
+    to { 
+        box-shadow: 0 0 20px var(--btn-main-color), inset 0 0 10px var(--btn-main-color); 
+        filter: brightness(1.3);
+    }
+}
+
+/* כפתור שכבר נלחץ */
+.clicked {
+    background: rgba(20, 20, 20, 0.9) !important;
+    border-color: #222 !important;
+    color: #444 !important;
+    opacity: 0.5;
+    animation: none !important;
+    pointer-events: none;
+    transform: scale(0.95) !important;
+}
+
+/* כפתור הפעלה ראשי */
+#start-btn {
+    font-family: var(--main-font);
+    padding: 15px 60px;
+    background: var(--neon-blue);
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 25px var(--neon-blue);
+    transition: 0.4s;
+    margin-bottom: 10px;
+}
+
+#start-btn:hover {
+    background: white;
+    box-shadow: 0 0 40px white;
+    transform: translateY(-3px);
+}
+
+
+/* חלון המודאל */
+#game-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+
+.modal-content {
+    background: var(--glass-bg);
+    padding: 40px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+    max-width: 400px;
+    width: 80%;
+        margin: auto; 
+  max-height: 75vh;
+    overflow-y: auto;
+
+
+}
+
+
+#modal-title {
+    font-family: var(--main-font);
+    color: var(--neon-blue);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#modal-stats {
+    margin: 20px 0;
+    font-size: 1.2rem;
+}
+
+#new-record-tag {
+    display: block;
+    color: #ffd700; /* זהב */
+    font-weight: bold;
+    margin-top: 10px;
+    animation: blink-animation 0.5s infinite alternate;
+}
+
+#restart-btn {
+    font-family: var(--main-font);
+    background: var(--neon-blue);
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#restart-btn:hover { background: white; box-shadow: 0 0 20px white; }
+
+/* חלון המודאל הראשי */
+#game-modal {
+    position: fixed; /* חייב להיות fixed כדי לצוף מעל הכל */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9); /* רקע שחור חזק */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* מספר גבוה מאוד כדי שיהיה מעל הרקע והכפתורים */
+    backdrop-filter: blur(10px); /* אפקט טשטוש לרקע */
+}
+
+/* המחלקה שמסתירה את המודאל */
+.modal-hidden {
+    display: none !important;
+}
+
+/* התוכן הלבן/שקוף של החלון */
+.modal-content {
+    background: #001a2e; /* כחול כהה עמוק */
+    padding: 40px;
+    border: 2px solid #00d4ff;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.6);
+    max-width: 450px;
+    width: 90%;
+    color: white;
+}
+
+#modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#modal-message {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+#modal-stats {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#new-record-tag {
+    display: block;
+    color: #ffd700;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.4rem;
+}
+
+/* כפתור ה-Restart בתוך המודאל */
+#restart-btn {
+    padding: 15px 40px;
+    background: #00d4ff;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#restart-btn:hover {
+    background: white;
+    box-shadow: 0 0 20px white;
+}
+
+/* הגדרה למקרה ששיא חדש מוסתר */
+.hidden {
+    display: none;
+}

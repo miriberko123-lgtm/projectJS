@@ -1,13 +1,25 @@
 // הגדרות כלליות למשחק
-const GAME_CONFIG = {
+/**
+ * @file config.js
+ * @description קובץ הגדרות גלובליות ומאגר המשימות של המשחק
+ */
+
+/**
+ * הגדרות בסיסיות של המשחק (צבעים, צורות, גודל לוח)
+ * @constant {Object}
+ */
+export const GAME_CONFIG = {
     COLORS: ['red', 'blue', 'green', 'yellow'],
     SHAPES: ['circle', 'square'],
     BOARD_SIZE: 20,
     INITIAL_TIME: 60
 };
 
-//משימות
-const GAME_TASKS = [
+/**
+ * מאגר המשימות של המשחק. שימוש בפונקציות חץ (Arrow Functions)
+ * @constant {Array<Object>}
+ */
+export const GAME_TASKS = [
     // --- משימות צבעים ---
     { desc: "לחץ על כל הכפתורים האדומים", check: (b) => b.color === 'red' },
     { desc: "לחץ על כפתורים כחולים או ירוקים", check: (b) => b.color === 'blue' || b.color === 'green' },

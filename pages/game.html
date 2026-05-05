@@ -1,0 +1,53 @@
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת בקרה עתידנית - המשחק</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Assistant:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>לוח בקרה מרכזי</h1>
+        <div id="task-display">ממתין לתחילת משחק...</div>
+        <nav style="margin-top: 10px;"><a href="../index.html" style="color: var(--neon-blue);">חזרה למסך הראשי</a></nav>
+    </header>
+
+    <div id="stats-container">
+        <div class="stat-box">
+            <span class="label">זמן נותר</span>
+            <div id="timer-display">00</div>
+        </div>
+        <div class="stat-box">
+            <span class="label">ניקוד</span>
+            <div id="score-display">0</div>
+        </div>
+        <div class="stat-box">
+            <span class="label">שיא אישי</span>
+            <div id="high-score-display">0</div>
+        </div>
+    </div>
+
+    <main id="game-container">
+        <div id="game-board"></div>
+    </main>
+
+    <button id="start-btn">הפעל מערכת (START)</button>
+
+    <!-- חלון קופץ לסיום המשחק -->
+    <div id="game-modal" class="modal-hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">סריקה הושלמה</h2>
+            <p id="modal-message"></p>
+            <div id="modal-stats">
+                <span id="final-score-display">ניקוד: 0</span>
+                <span id="new-record-tag" class="hidden"></span>
+            </div>
+            <button id="restart-btn">אתחול מערכת מחדש (RESTART)</button>
+        </div>
+    </div>
+
+    <!-- שים לב לשינוי לשם התיקייה scripts ולתוספת type="module" שנדרשת ל-ES6 Import/Export -->
+    <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>
