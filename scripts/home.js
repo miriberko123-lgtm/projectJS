@@ -3,9 +3,8 @@
  * @description אחראי על שמירת נתוני המשתמש בדף הבית לפני תחילת המשחק
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('login-form');
-    
+document.addEventListener('DOMContentLoaded', () => {// מוודא שה-DOM נטען לפני הריצה
+    const loginForm = document.getElementById('login-form');// בודק אם הטופס קיים בדף לפני שמוסיף לו מאזין
     if (loginForm) {
         loginForm.addEventListener('submit', (event) => {
             // עוצר את השליחה האוטומטית של הדפדפן כדי שנוכל לשמור את הנתונים
@@ -40,7 +39,7 @@ if (usernameInput.includes('@') || usernameInput.includes('!')) {
         return; // עוצר את תהליך ההתחברות והמעבר דף
 
 }
-            const levelInput = document.getElementById('level').value;
+            const levelInput = document.getElementById('level').value;// כאן אפשר להוסיף ולידציה נוספת אם רוצים לוודא שהמשתמש בחר רמה
             
             // יצירת אובייקט מורכב לשמירת השחקן הנוכחי (דרישת פרויקט) [2]
             const currentPlayer = {
@@ -52,7 +51,7 @@ if (usernameInput.includes('@') || usernameInput.includes('!')) {
             localStorage.setItem('activePlayer', JSON.stringify(currentPlayer));
             
             // מעבר יזום לדף המשחק לאחר השמירה
-            window.location.href = 'pages/game.html';
+            window.location.href ='pages/game.html';
         });
     }
 });

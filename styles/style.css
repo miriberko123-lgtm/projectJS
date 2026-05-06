@@ -10,7 +10,6 @@
 
 /* הגדרות גוף העמוד והרקע */
 body {
-    background-image: url('assets/background.png'); /* וודאי שהנתיב לתמונה מדויק */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -38,6 +37,21 @@ body {
     color: white;
     overflow-x: hidden; /* מונע גלילה אופקית בלבד */
 
+}
+/* רקע ייעודי למסך הפתיחה וההתחברות */
+#home-screen {
+    background-image: url('assets/home-bg.png'); 
+}
+
+/* רקע ייעודי למסך המשחק */
+#game-screen {
+    background-image: url('assets/game-bg.png');
+}
+#scores-screen {
+    background-image: url('assets/scores-bg.png');
+}
+#instructions-screen {
+    background-image: url('assets/instructions-bg.png');
 }
 
 /* שכבת עומק לרקע */

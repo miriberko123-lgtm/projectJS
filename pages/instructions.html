@@ -6,23 +6,32 @@
     <title>הוראות - מערכת בקרה עתידנית</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Assistant:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
+    
+    <!-- סקריפט המוזיקה הגלובלית ששומר על רצף המנגינה -->
+    <script src="../scripts/music.js"></script>
 </head>
-<body>
+<body id="instructions-screen">
+
     <header>
         <h1>הוראות תפעול למערכת</h1>
     </header>
+
     <main class="modal-content" style="position: relative; margin: auto; margin-top: 50px; text-align: right;">
-        <h2 style="color: var(--neon-blue); text-align: center;">איך משחקים?</h2>
-        <ul>
-            <li>הזדהה במסך הראשי ובחר רמת קושי.</li>
-            <li>במסך הבקרה, עקוב אחר ההוראות המופיעות למעלה (למשל: "לחץ על כל הכפתורים האדומים").</li>
-            <li>לחץ רק על האלמנטים המתאימים להוראה.</li>
-            <li>כל לחיצה נכונה מזכה אותך ב-10 נקודות. לחיצה שגויה תוריד 5 נקודות.</li>
-            <li>המשחק מסתיים כאשר הזמן אוזל או כשכל המשימות הושלמו.</li>
+        <h2 style="color: var(--neon-blue); text-align: center;">איך שורדים את המערכת?</h2>
+        
+        <ul style="line-height: 1.8; font-size: 1.1rem;">
+            <li><strong>התחברות:</strong> הזן שם סוכן במסך הראשי ובחר רמת אבטחה (קלה - 60 שניות / קשה - 30 שניות).</li>
+            <li><strong>משימות:</strong> עקוב אחר ההוראות המשתנות בראש המסך (למשל: "לחץ על כפתורים אדומים"). לחץ רק על הכפתורים שמתאימים להוראה.</li>
+            <li><strong>ניקוד:</strong> כל לחיצה נכונה תזכה אותך ב-10 נקודות. לחיצה שגויה תוריד 5 נקודות מהמאזן שלך.</li>
+            <li><span style="color: var(--neon-red); font-weight: bold;">סכנת השבתה (GAME OVER):</span> ביצוע <strong>3 לחיצות שגויות</strong> באותה משימה יוביל לכישלון מיידי והמערכת תינעל!</li>
+            <li><span style="color: #00ff88; font-weight: bold;">איך מנצחים?</span> המטרה שלך היא <strong>לשרוד עד שהזמן ייגמר!</strong> השלם כמה שיותר משימות ואסוף נקודות לפני תום השעון מבלי לצבור 3 פסילות.</li>
         </ul>
+
         <div style="text-align: center; margin-top: 30px;">
-            <a href="../index.html" id="start-btn" style="text-decoration: none; padding: 10px 20px;">הבנתי, חזור לראשי</a>
+            <a href="../index.html" id="start-btn" style="text-decoration: none; padding: 10px 20px;">הבנתי, חזור למסך הראשי</a>
         </div>
+
     </main>
+
 </body>
 </html>

@@ -16,6 +16,36 @@ let currentBoard = [];
 let currentTask = null;
 let mistakesCount = 0; 
 
+// === מערכת סאונד (בונוס פרויקט) ===
+const activeBgMusic = new Audio('../styles/assets/music/צליל מהירות.mp3'); // מנגינה קצבית למשחק
+activeBgMusic.loop = true;
+activeBgMusic.volume = 0.3;
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playSystemSound(type) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    if (type === 'success') {
+        oscillator.type = 'sine'; // צליל חלק ונעים
+        oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // תדר גבוה (הצלחה)
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.1); // אורך הצליל
+    } else if (type === 'error') {
+        oscillator.type = 'sawtooth'; // צליל מחוספס (שגיאה)
+        oscillator.frequency.setValueAtTime(300, audioCtx.currentTime); // תדר נמוך
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.2);
+    }
+}
 
 // שליפת נתונים מדף ההרשמה (Query Parameters)
 // משיכת פרטי השחקן שנשמרו בדף הבית
@@ -25,14 +55,14 @@ const activePlayerData = JSON.parse(localStorage.getItem('activePlayer'));
 const playerName = activePlayerData ? activePlayerData.name : ' אנונימי';
 const difficulty = activePlayerData ? activePlayerData.level : 'easy';
 
-
-
-
-
 /**
  * מאתחלת את המשחק כשלוחצים START
  */
 function initGame() {
+    if (window.systemBgMusic) window.systemBgMusic.pause();
+    activeBgMusic.currentTime = 0;
+    activeBgMusic.play();
+
     score = 0;
     completedTasks = 0;
     timeLeft = difficulty === 'hard' ? 30 : GAME_CONFIG.INITIAL_TIME;// אם בחר רמה קשה, הזמן מתקצר
@@ -87,6 +117,8 @@ function handleButtonClick(buttonObj) {
     const isCorrect = currentTask.check(buttonObj);// בודק אם הכפתור שנלחץ מתאים למשימה הנוכחית
 
     if (isCorrect) {
+        
+        playSystemSound('success');
         buttonObj.isClicked = true;
         score += 10;
         updateScoreUI(score);
@@ -98,6 +130,7 @@ function handleButtonClick(buttonObj) {
             nextLevel();
         }
     } else {
+        playSystemSound('error');
         score = Math.max(0, score - 5);
         updateScoreUI(score);
         mistakesCount++;
@@ -118,6 +151,11 @@ function handleButtonClick(buttonObj) {
  * @param {boolean} isTimeUp - האם המשחק הסתיים בגלל חריגת זמן
  */
 function endGame(isTimeUp) {
+      // עצירת הטיימר ומוזיקת הרקע
+    clearInterval(timerInterval);
+    activeBgMusic.pause();
+    if (window.systemBgMusic) window.systemBgMusic.play();
+
     // 1. עצירת השעון וניקוי הלוח בצורה בטוחה
     clearInterval(timerInterval);
     const board = document.getElementById('game-board');
