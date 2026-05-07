@@ -21,29 +21,29 @@ const activeBgMusic = new Audio('../styles/assets/music/צליל מהירות.mp
 activeBgMusic.loop = true;
 activeBgMusic.volume = 0.3;
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();// יצירת קונטקסט שמע עבור הצלילים המותאמים אישית  
 
 function playSystemSound(type) {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (audioCtx.state === 'suspended') audioCtx.resume();// לוודא שהקונטקסט פעיל לפני יצירת הצליל
     
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
+    const oscillator = audioCtx.createOscillator();// יצירת גנרטור צליל פשוט
+    const gainNode = audioCtx.createGain();// יצירת יחידת שליטה בעוצמת הצליל
     
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
+    oscillator.connect(gainNode);// חיבור הגנרטור ל-GainNode
+    gainNode.connect(audioCtx.destination);// חיבור ה-GainNode ליעד השמע (רמקולים)
     
     if (type === 'success') {
         oscillator.type = 'sine'; // צליל חלק ונעים
         oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // תדר גבוה (הצלחה)
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        oscillator.start();
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);// עוצמה נמוכה כדי שלא יהיה חזק מדי
+        oscillator.start();// התחלת הצליל
         oscillator.stop(audioCtx.currentTime + 0.1); // אורך הצליל
-    } else if (type === 'error') {
+    } else if (type === 'error') {// צליל מחוספס יותר (שגיאה)
         oscillator.type = 'sawtooth'; // צליל מחוספס (שגיאה)
         oscillator.frequency.setValueAtTime(300, audioCtx.currentTime); // תדר נמוך
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 0.2);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);// עוצמה נמוכה
+        oscillator.start();// התחלת הצליל
+        oscillator.stop(audioCtx.currentTime + 0.2);// אורך הצליל ארוך יותר כדי להדגיש את השגיאה
     }
 }
 
@@ -258,10 +258,10 @@ function endGame(isTimeUp) {
 
 // חיבור מאזיני אירועים ברגע שהדף נטען
 
-const startBtn = document.getElementById('start-btn');
-if (startBtn) startBtn.addEventListener('click', initGame);
+const startBtn = document.getElementById('start-btn');// הוספת בדיקה כדי לוודא שהכפתור קיים לפני שמחברים לו מאזין
+if (startBtn) startBtn.addEventListener('click', initGame);// חיבור כפתור ההתחלה לפונקציית האתחול
 
-const restartBtn = document.getElementById('restart-btn');
+const restartBtn = document.getElementById('restart-btn');// הוספת בדיקה כדי לוודא שהכפתור קיים לפני שמחברים לו מאזין
 if (restartBtn) {
     restartBtn.addEventListener('click', () => {
         // העלמת חלון הסיום
@@ -278,7 +278,7 @@ if (restartBtn) {
 // === התוספת החדשה: האזנה למקש Enter להתחלה ואתחול ===
 document.addEventListener('keydown', (event) => {
     // שימוש באובייקט ה-event כדי לבדוק איזה מקש נלחץ
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter') {// אם נלחץ מקש Enter, נבדוק את מצב המשחק ונפעל בהתאם
         const startBtnElement = document.getElementById('start-btn');
         const modalElement = document.getElementById('game-modal');
 

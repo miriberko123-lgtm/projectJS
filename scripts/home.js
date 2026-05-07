@@ -51,7 +51,7 @@ if (usernameInput.includes('@') || usernameInput.includes('!')) {
             localStorage.setItem('activePlayer', JSON.stringify(currentPlayer));
             
             // מעבר יזום לדף המשחק לאחר השמירה
-            window.location.href ='pages/game.html';
+            window.location.href ='pages/play.html';
         });
     }
 });

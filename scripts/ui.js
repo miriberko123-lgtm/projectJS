@@ -8,7 +8,7 @@
  * @param {Object} task - אובייקט המשימה
  */
 export function displayTask(task) {
-    const taskDisplay = document.getElementById('task-display');
+    const taskDisplay = document.getElementById('task-display');// בודק אם האלמנט קיים לפני שמנסה לשנות את הטקסט שלו
     if (taskDisplay) taskDisplay.textContent = `המשימה: ${task.desc}`;
 }
 
@@ -31,11 +31,11 @@ export function renderBoard(buttonsData, onButtonClick) {
         
         btn.style.setProperty('--btn-main-color', buttonObj.color);
         
-        if (buttonObj.isActive) {
+        if (buttonObj.isActive) {// הוספת אפקט זוהר לכפתורים פעילים
             btn.classList.add('blinking');
         }
         
-        btn.addEventListener('click', () => onButtonClick(buttonObj));
+        btn.addEventListener('click', () => onButtonClick(buttonObj));// חיבור פונקציית הלחיצה עם הנתונים של הכפתור
         boardElement.appendChild(btn);
     });
 }
